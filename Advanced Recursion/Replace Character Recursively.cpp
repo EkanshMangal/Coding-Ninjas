@@ -22,13 +22,6 @@ xbxcd
 using namespace std;
 
 
-int length(char s[]) {
-	if (s[0] == '\0') {
-		return 0;
-	}
-	int smallStringLength = length(s + 1);
-	return 1 + smallStringLength;
-}
 void replaceCharacter(char str[], char c, char d) {
     /* Don't write main().
      * Don't read input, it is passed as function argument.
@@ -36,14 +29,18 @@ void replaceCharacter(char str[], char c, char d) {
      * Change in the given input string itself.
      * Taking input and printing output is handled automatically.
      */
-    int i;
-    
-    for(i=0;i!=length(str);i++)
+	if(str[0]=='\0')
     {
-        if(str[i]==c)
-        {
-            str[i]=d;
-        }
+        return;
+    }
+    if(str[0]!=c)
+    {
+        return replaceCharacter(str+1,c,d);
+    }
+    else if(str[0]==c)
+    {
+        str[0]=d;
+        return replaceCharacter(str+1,c,d);
     }
 }
 /*
